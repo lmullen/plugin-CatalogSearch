@@ -10,6 +10,15 @@ vocabularies to your items.
 
 Lincoln A. Mullen | lincoln@lincolnmullen.com | http://lincolnmullen.com
 
+## Examples
+
+Here are a few items in the [American Converts Database][] that show how
+the links work:
+
+-   [Jane Minot Sedgwick][]
+-   [Isaac Hecker][]
+-   [Warder Cresson][]
+
 ## Future Plans
 
 Future versions of this plugin will let users
@@ -37,3 +46,6 @@ with this program. If not, see http://www.gnu.org/licenses/.
   [Omeka]: http://omeka.org
   [American Converts Database]: http://americanconverts.org
   [Library of Congress Suggest plugin]: http://omeka.org/add-ons/plugins/library-of-congress-suggest/
+  [Jane Minot Sedgwick]: http://americanconverts.org/items/show/5
+  [Isaac Hecker]: http://americanconverts.org/items/show/3
+  [Warder Cresson]: http://americanconverts.org/items/show/7
