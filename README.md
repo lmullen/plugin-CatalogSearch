@@ -1,11 +1,12 @@
 # Catalog Search Plugin for Omeka
 
 A plugin for [Omeka][] that uses the subject field in an Omeka item to
-generate links to searches in catalogs, such as Archive Grid, the
-Library of Congress, and WorldCat. This plugin was created for the
-[American Converts Database][] but it is useful more generally. This
-plugin works best if you use Omeka's [Library of Congress Suggest
-plugin][] to add LoC authorities and vocabularies to your items.
+generate links to searches in catalogs such as Archive Grid, JSTOR,
+Google Books, Google Scholar, the Library of Congress, and WorldCat.
+This plugin was created for the [American Converts Database][] but it is
+useful more generally. This plugin works best if you use Omeka's
+[Library of Congress Suggest plugin][] to add LoC authorities and
+vocabularies to your items.
 
 Lincoln A. Mullen | lincoln@lincolnmullen.com | http://lincolnmullen.com
 
