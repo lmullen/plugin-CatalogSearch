@@ -8,8 +8,35 @@
 class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
 
   protected $_hooks = array(
+    'install',
+    'uninstall',
     'public_items_show'
   );
+
+  public function hookInstall() {
+    // Create the table.
+    $db = $this->_db;
+    $sql = "
+      CREATE TABLE IF NOT EXISTS `$db->CatalogSearch` (
+        `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+        `query_string` tinytext COLLATE utf8_unicode_ci NOT NULL,
+        `catalog_name` tinytext COLLATE utf8_unicode_ci NOT NULL,
+        `display` tinyint(1) NOT NULL,
+        `query_type` tinyint(1) NOT NULL,
+        PRIMARY KEY (`id`)
+      ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+    $db->query($sql);
+  }
+
+  public function hookUninstall() {
+    // Drop the table.
+    $db = $this->_db;
+    $sql = "DROP TABLE IF EXISTS `$db->CatalogSearch`";
+    $db->query($sql);
+
+    $this->_uninstallOptions();
+  }
+
 
   public function hookPublicItemsShow(){
 
