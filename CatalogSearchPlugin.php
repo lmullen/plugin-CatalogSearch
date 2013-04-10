@@ -12,6 +12,7 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
   protected $_hooks = array(
     'install',
     'uninstall',
+    'upgrade',
     'public_items_show'
   );
 
@@ -85,6 +86,19 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     $library_of_congress->query_type = 1;
     $library_of_congress->editable = 0;
     $library_of_congress->save();
+  }
+
+  public function hookUpgrade($args)
+  {
+    $oldVersion = $args['old_version'];
+    $newVersion = $args['new_version'];
+
+    if ($oldVersion < '1.0') {
+      // Earlier versions did not create a db table, so just run the 
+      // install hook.
+      $this->hookInstall();
+    }
+
   }
 
   public function hookUninstall() {
