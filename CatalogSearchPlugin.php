@@ -25,6 +25,7 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
         `catalog_name` tinytext COLLATE utf8_unicode_ci NOT NULL,
         `display` tinyint(1) NOT NULL,
         `query_type` tinyint(1) NOT NULL,
+        `editable` tinyint(1) NOT NULL,
         PRIMARY KEY (`id`)
       ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
     $db->query($sql);
@@ -41,6 +42,7 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     $jstor->catalog_name = 'JSTOR';
     $jstor->display = 1;
     $jstor->query_type = 0;
+    $jstor->editable = 0;
     $jstor->save();
 
   }

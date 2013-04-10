@@ -16,6 +16,7 @@ class CatalogSearchSearch extends Omeka_Record_AbstractRecord
   public $catalog_name;
   public $display;
   public $query_type;
+  public $editable;
 
 }
 
