@@ -101,7 +101,7 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     $item = get_current_record('item');
     $subject = strip_formatting(metadata($item, array('Dublin Core', 'Subject')));
 
-    // Strip punctuation and dates for finicky or unsophisticated catalogs
+     // Strip punctuation and dates for finicky or unsophisticated catalogs
     $subject_clean = preg_replace('/[^a-z\ ]/i', '', $subject); 
 
     /* Only display the links if the item has a subject */
@@ -111,7 +111,9 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
       echo "<h3>" .__("Catalog Search") . "</h3>";
       echo "<p>" . __("Search for related records in these catalogs:") . "</p>";
 
-      $searches = get_db()->getTable('CatalogSearchSearch')->findAll();
+      $searches = get_db()->getTable('CatalogSearchSearch')->getAllCatalogSearches();
+      /* sort($searches->catalog_name); */
+      /* var_dump($searches); */
       foreach ($searches as $search) {
 
         // Echo the search link to the catalog.
