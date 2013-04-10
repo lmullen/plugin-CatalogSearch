@@ -46,6 +46,45 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     $jstor->editable = 0;
     $jstor->save();
 
+    $archive_grid = new CatalogSearchSearch;
+    $archive_grid->query_string = 'http://archivegrid.org/web/jsp/s.jsp?q=%s';
+    $archive_grid->catalog_name = 'Archive Grid';
+    $archive_grid->display = 1;
+    $archive_grid->query_type = 0;
+    $archive_grid->editable = 0;
+    $archive_grid->save();
+
+    $google_books = new CatalogSearchSearch;
+    $google_books->query_string = 'https://www.google.com/search?btnG=Search+Books&tbm=bks&tbo=1&q=%s';
+    $google_books->catalog_name = 'Google Books';
+    $google_books->display = 1;
+    $google_books->query_type = 0;
+    $google_books->editable = 0;
+    $google_books->save();
+
+    $google_scholar = new CatalogSearchSearch;
+    $google_scholar->query_string = 'http://scholar.google.com/scholar?btnG=&as_sdt=1%2C22&as_sdtp=&q=%s';
+    $google_scholar->catalog_name = 'Google Scholar';
+    $google_scholar->display = 1;
+    $google_scholar->query_type = 0;
+    $google_scholar->editable = 0;
+    $google_scholar->save();
+
+    $worldcat = new CatalogSearchSearch;
+    $worldcat->query_string = 'http://www.worldcat.org/search?qt=worldcat_org_all&q=%s';
+    $worldcat->catalog_name = 'WorldCat';
+    $worldcat->display = 1;
+    $worldcat->query_type = 1;
+    $worldcat->editable = 0;
+    $worldcat->save();
+
+    $library_of_congress = new CatalogSearchSearch;
+    $library_of_congress->query_string = 'http://catalog2.loc.gov/vwebv/search?searchArg=%s&searchCode=GKEY%5E*&searchType=0';
+    $library_of_congress->catalog_name = 'Library of Congress';
+    $library_of_congress->display = 1;
+    $library_of_congress->query_type = 1;
+    $library_of_congress->editable = 0;
+    $library_of_congress->save();
   }
 
   public function hookUninstall() {
@@ -56,7 +95,6 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
 
     $this->_uninstallOptions();
   }
-
 
   public function hookPublicItemsShow(){
 
