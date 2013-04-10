@@ -19,7 +19,7 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     // -------------------------------------------------------------
     $db = $this->_db;
     $sql = "
-      CREATE TABLE IF NOT EXISTS `$db->CatalogSearchSearches` (
+      CREATE TABLE IF NOT EXISTS `$db->CatalogSearchSearch` (
         `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
         `query_string` tinytext COLLATE utf8_unicode_ci NOT NULL,
         `catalog_name` tinytext COLLATE utf8_unicode_ci NOT NULL,
@@ -50,7 +50,7 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
   public function hookUninstall() {
     // Drop the table.
     $db = $this->_db;
-    $sql = "DROP TABLE IF EXISTS `$db->CatalogSearchSearches`";
+    $sql = "DROP TABLE IF EXISTS `$db->CatalogSearchSearch`";
     $db->query($sql);
 
     $this->_uninstallOptions();
