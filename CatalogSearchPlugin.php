@@ -99,25 +99,30 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
   public function hookPublicItemsShow(){
 
     $item = get_current_record('item');
-    $subject = strip_formatting(metadata($item, array('Dublin Core', 'Subject')));
+    $subject_full = strip_formatting(metadata($item, array('Dublin Core', 'Subject')));
 
     // Strip punctuation and dates for finicky or unsophisticated catalogs
-    $subject_clean = preg_replace('/[^a-z\ ]/i', ' ', $subject); 
+    $subject_simple = preg_replace('/[^a-z\ ]/i', ' ', $subject_full); 
 
     /* Only display the links if the item has a subject */
-    if ($subject !== "") {
+    if ($subject_full !== "") {
 
       echo "<div id='catalog-search' class='element'>";
       echo "<h3>" .__("Catalog Search") . "</h3>";
       echo "<p>" . __("Search for related records in these catalogs:") . "</p>";
 
       $searches = get_db()->getTable('CatalogSearchSearch')->getAllCatalogSearches();
-      /* sort($searches->catalog_name); */
-      /* var_dump($searches); */
       foreach ($searches as $search) {
 
+        // Decide whether to use full or simple query terms. 
+        if ($search->query_type == '1') {
+          $subject_use = $subject_full;
+        } elseif ($search->query_type == '0') {
+          $subject_use = $subject_simple;
+        }
+
         // Echo the search link to the catalog.
-        echo "<div class='element-text'><a href='" . getCatalogSearchUrl($search->query_string, $subject_clean) . "'>" . $search->catalog_name . "</a></div>";
+        echo "<div class='element-text'><a href='" . getCatalogSearchUrl($search->query_string, $subject_use) . "'>" . $search->catalog_name . "</a></div>";
 
       }
 
