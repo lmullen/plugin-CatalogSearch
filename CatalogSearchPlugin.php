@@ -14,10 +14,12 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
   );
 
   public function hookInstall() {
+
     // Create the table.
+    // -------------------------------------------------------------
     $db = $this->_db;
     $sql = "
-      CREATE TABLE IF NOT EXISTS `$db->CatalogSearch` (
+      CREATE TABLE IF NOT EXISTS `$db->CatalogSearchSearches` (
         `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
         `query_string` tinytext COLLATE utf8_unicode_ci NOT NULL,
         `catalog_name` tinytext COLLATE utf8_unicode_ci NOT NULL,
@@ -26,12 +28,27 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
         PRIMARY KEY (`id`)
       ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
     $db->query($sql);
+
+    // Add default queries to database
+    // -------------------------------------------------------------
+    // query_string is the search URL with %s for the search terms
+    // catalog_name is the display name of the catalog
+    // display is an option for whether to display the search link
+    // query_type is 1 for full queries, 0 for short queries
+
+    $jstor = new CatalogSearchSearch;
+    $jstor->query_string = 'http://www.jstor.org/action/doBasicSearch?Query=%s';
+    $jstor->catalog_name = 'JSTOR';
+    $jstor->display = 1;
+    $jstor->query_type = 0;
+    $jstor->save();
+
   }
 
   public function hookUninstall() {
     // Drop the table.
     $db = $this->_db;
-    $sql = "DROP TABLE IF EXISTS `$db->CatalogSearch`";
+    $sql = "DROP TABLE IF EXISTS `$db->CatalogSearchSearches`";
     $db->query($sql);
 
     $this->_uninstallOptions();
