@@ -5,6 +5,8 @@
  *
  * */
 
+require_once dirname(__FILE__) . '/helpers/CatalogSearchFunctions.php';
+
 class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
 
   protected $_hooks = array(
@@ -36,7 +38,6 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     // catalog_name is the display name of the catalog
     // display is an option for whether to display the search link
     // query_type is 1 for full queries, 0 for short queries
-
     $jstor = new CatalogSearchSearch;
     $jstor->query_string = 'http://www.jstor.org/action/doBasicSearch?Query=%s';
     $jstor->catalog_name = 'JSTOR';
@@ -72,33 +73,18 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
       echo "<h3>" .__("Catalog Search") . "</h3>";
       echo "<p>" . __("Search for related records in these catalogs:") . "</p>";
 
-      /* Archive Grid */
-      $archivegrid_url = "http://archivegrid.org/web/jsp/s.jsp?q=" . urlencode($subject_clean);
-      echo "<div class='element-text'><a href='" . $archivegrid_url . "'>" . __("Archive Grid") . "</a></div>";
+      $searches = get_db()->getTable('CatalogSearchSearch')->findAll();
+      foreach ($searches as $search) {
 
-      /* Google Books */
-      $googlebooks_url = "https://www.google.com/search?btnG=Search+Books&tbm=bks&tbo=1&q=" . urlencode($subject_clean);
-      echo "<div class='element-text'><a href='" . $googlebooks_url . "'>" . __("Google Books") . "</a></div>";
+        // Echo the search link to the catalog.
+        echo "<div class='element-text'><a href='" . getCatalogSearchUrl($search->query_string, $subject_clean) . "'>" . $search->catalog_name . "</a></div>";
 
-      /* Google Scholar */
-      $googlescholar_url = "http://scholar.google.com/scholar?btnG=&as_sdt=1%2C22&as_sdtp=&q=" . urlencode($subject_clean);
-      echo "<div class='element-text'><a href='" . $googlescholar_url . "'>" . __("Google Scholar") . "</a></div>";
-
-      /* JSTOR */
-      $jstor_url = "http://www.jstor.org/action/doBasicSearch?Query=" . urlencode($subject_clean);
-      echo "<div class='element-text'><a href='" . $jstor_url . "'>" . __("JSTOR") . "</a></div>";
-
-      /* Library of Congress */
-      $loc_url = "http://catalog2.loc.gov/vwebv/search?searchArg=" . urlencode($subject) . "&searchCode=GKEY%5E*&searchType=0";
-      echo "<div class='element-text'><a href='" . $loc_url . "'>" . __("Library of Congress") . "</a></div>";
-
-      /* WorldCat */
-      $worldcat_url = "http://www.worldcat.org/search?qt=worldcat_org_all&q=" . urlencode($subject);
-      echo "<div class='element-text'><a href='" . $worldcat_url . "'>" . __("Worldcat") . "</a></div>";
+      }
 
       echo "</div>";
     }
   }
-}
 
+}
 ?>
+
