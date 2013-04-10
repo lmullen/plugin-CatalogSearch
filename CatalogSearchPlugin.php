@@ -138,7 +138,10 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
         }
 
         // Echo the search link to the catalog.
-        echo "<div class='element-text'><a href='" . getCatalogSearchUrl($search->query_string, $subject_use) . "'>" . $search->catalog_name . "</a></div>";
+        echo "<div class='element-text'><a href='" 
+          . getCatalogSearchUrl($search->query_string, $subject_use) 
+          . "'>" . $search->catalog_name 
+          . "</a></div>";
 
       }
 
