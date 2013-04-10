@@ -116,7 +116,9 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     $subject_full = strip_formatting(metadata($item, array('Dublin Core', 'Subject')));
 
     // Strip punctuation and dates for finicky or unsophisticated catalogs
-    $subject_simple = preg_replace('/[^a-z\ ]/i', ' ', $subject_full); 
+    $patterns = array('/[^a-z\ ]/i', '/\s+/', '/\s+$/');
+    $replacements = array(' ', ' ', '');
+    $subject_simple = preg_replace($patterns, $replacements, $subject_full); 
 
     /* Only display the links if the item has a subject */
     if ($subject_full !== "") {
