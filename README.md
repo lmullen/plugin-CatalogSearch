@@ -10,6 +10,12 @@ vocabularies to your items.
 
 Lincoln A. Mullen | lincoln@lincolnmullen.com | http://lincolnmullen.com
 
+## Configuration
+
+The plugin will not display catalog links unless your item has a 
+Dublin Core subject. The plugin will use only the first Dublin Core 
+subject if there are multiple subjects.
+
 ## Examples
 
 Here are a few items in the [American Converts Database][] that show how
