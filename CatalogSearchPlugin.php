@@ -110,6 +110,17 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     $this->_uninstallOptions();
   }
 
+  public function hookConfigForm()
+  {
+    require dirname(__FILE__) . '/config_form.php';
+  }
+
+  public function hookConfig()
+  {
+
+  }
+
+  // Display the links to the catalogs on the public item page
   public function hookPublicItemsShow(){
 
     $item = get_current_record('item');
