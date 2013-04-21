@@ -13,7 +13,12 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     'install',
     'uninstall',
     'upgrade',
+    'define_acl',
     'public_items_show'
+  );
+
+  protected $_filters = array(
+    'admin_navigation_main'
   );
 
   public function hookInstall() {
@@ -110,14 +115,28 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     $this->_uninstallOptions();
   }
 
-  public function hookConfigForm()
+  public function hookDefineAcl($args)
   {
-    require dirname(__FILE__) . '/config_form.php';
+        $acl = $args['acl'];
+
+        $indexResource = new Zend_Acl_Resource('CatalogSearch_Index');
+        $pageResource = new Zend_Acl_Resource('CatalogSearch_Page');
+        $acl->add($indexResource);
+        $acl->add($pageResource);
+
+        $acl->allow(array('super', 'admin'), array('CatalogSearch_Index', 'CatalogSearch_Page'));
+        $acl->allow(null, 'CatalogSearch_Page', 'show');
   }
 
-  public function hookConfig()
+  public function filterAdminNavigationMain($nav)
   {
-
+    $nav[] = array(
+      'label' => __('Catalog Search'),
+      'uri' => url('catalog-search'),
+      'resource' => 'CatalogSearch_Index',
+      'privilege' => 'browse'
+    );
+    return $nav;
   }
 
   // Display the links to the catalogs on the public item page
