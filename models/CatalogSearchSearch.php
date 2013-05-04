@@ -26,5 +26,33 @@ class CatalogSearchSearch extends Omeka_Record_AbstractRecord
       'action' => $action, 'id' => $this->id);
   }
 
+  protected function _validate()
+  {
+    if (empty($this->catalog_name)) {
+      $this->addError('catalog_name', __('The catalog must be given a name.'));
+    }
+
+    if (255 < strlen($this->catalog_name)) {
+      $this->addError('catalog_name', __('The catalog name must be 255 characters or fewer'));
+    }
+
+    if (255 < strlen($this->query_string)) {
+      $this->adderror('query_string', __('The query string must be 255 characters or fewer.'));
+    }
+
+    if (!strpos($this->query_string, '%s')) {
+      $this->adderror('query_string', __('The query string must contain %s.'));
+    }
+
+    if (substr($this->query_string, 0, 4) !== 'http') {
+      $this->adderror('query_string', __('The query string must be a valid URL.'));
+    }
+
+    if (empty($this->query_string)) {
+      $this->addError('query_string', __('You must provide a query string.'));
+    }
+
+  }
+
 }
 
