@@ -50,6 +50,13 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     $archive_grid->query_type = 1;
     $archive_grid->save();
 
+    $dpla = new CatalogSearchSearch;
+    $dpla->query_string = 'http://dp.la/search?utf8=%E2%9C%93&q=%s';
+    $dpla->catalog_name = 'Digital Public Library of America';
+    $dpla->display = 1;
+    $dpla->query_type = 0;
+    $dpla->save();
+
     $google_books = new CatalogSearchSearch;
     $google_books->query_string = 'https://www.google.com/search?btnG=Search+Books&tbm=bks&tbo=1&q=%s';
     $google_books->catalog_name = 'Google Books';
@@ -63,6 +70,13 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     $google_scholar->display = 1;
     $google_scholar->query_type = 1;
     $google_scholar->save();
+
+    $hathi_trust = new CatalogSearchSearch;
+    $hathi_trust->query_string = 'http://catalog.hathitrust.org/Search/Home?lookfor=%s&searchtype=all&ft=&setft=false';
+    $hathi_trust->catalog_name = 'Hathi Trust';
+    $hathi_trust->display = 1;
+    $hathi_trust->query_type = 0;
+    $hathi_trust->save();
 
     $jstor = new CatalogSearchSearch;
     $jstor->query_string = 'http://www.jstor.org/action/doBasicSearch?Query=%s';
