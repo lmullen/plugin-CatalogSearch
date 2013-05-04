@@ -79,7 +79,7 @@ class CatalogSearch_IndexController extends Omeka_Controller_AbstractActionContr
           . 'with the characters <code>%s</code> replacing the '
           . 'search terms. <br/> '
           . 'Example: <code>https://www.google.com/search?q=%s</code><br/> '
-          . 'See <a href=http://chronicle.com/blogs/profhacker/how-to-hack-urls-for-faster-searches-in-your-browser/42304">this post</a> for help.'
+          . 'See <a href="http://chronicle.com/blogs/profhacker/how-to-hack-urls-for-faster-searches-in-your-browser/42304">this ProfHacker post</a> for help.'
         )
       )
     );

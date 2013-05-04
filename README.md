@@ -59,7 +59,7 @@ with this program. If not, see http://www.gnu.org/licenses/.
   [American Converts Database]: http://americanconverts.org
   [Library of Congress Suggest plugin]: http://omeka.org/add-ons/plugins/library-of-congress-suggest/
   [Chrome's documentation]: http://support.google.com/chrome/bin/answer.py?hl=en&answer=95653
-  [ProfHacker post]: http://chronicle.com/blogs/profhacker/how-to-hack-urls-for-faster-searches-in-your-browser
+  [ProfHacker post]: http://chronicle.com/blogs/profhacker/how-to-hack-urls-for-faster-searches-in-your-browser/42304
   [Jane Minot Sedgwick]: http://americanconverts.org/items/show/5
   [Isaac Hecker]: http://americanconverts.org/items/show/3
   [Warder Cresson]: http://americanconverts.org/items/show/7
