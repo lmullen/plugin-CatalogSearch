@@ -43,13 +43,6 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     // catalog_name is the display name of the catalog
     // display is an option for whether to display the search link
     // query_type is 0 for full queries, 1 for short queries
-    $jstor = new CatalogSearchSearch;
-    $jstor->query_string = 'http://www.jstor.org/action/doBasicSearch?Query=%s';
-    $jstor->catalog_name = 'JSTOR';
-    $jstor->display = 1;
-    $jstor->query_type = 1;
-    $jstor->save();
-
     $archive_grid = new CatalogSearchSearch;
     $archive_grid->query_string = 'http://archivegrid.org/web/jsp/s.jsp?q=%s';
     $archive_grid->catalog_name = 'Archive Grid';
@@ -71,12 +64,12 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     $google_scholar->query_type = 1;
     $google_scholar->save();
 
-    $worldcat = new CatalogSearchSearch;
-    $worldcat->query_string = 'http://www.worldcat.org/search?qt=worldcat_org_all&q=%s';
-    $worldcat->catalog_name = 'WorldCat';
-    $worldcat->display = 1;
-    $worldcat->query_type = 0;
-    $worldcat->save();
+    $jstor = new CatalogSearchSearch;
+    $jstor->query_string = 'http://www.jstor.org/action/doBasicSearch?Query=%s';
+    $jstor->catalog_name = 'JSTOR';
+    $jstor->display = 1;
+    $jstor->query_type = 1;
+    $jstor->save();
 
     $library_of_congress = new CatalogSearchSearch;
     $library_of_congress->query_string = 'http://catalog2.loc.gov/vwebv/search?searchArg=%s&searchCode=GKEY%5E*&searchType=0';
@@ -84,6 +77,13 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     $library_of_congress->display = 1;
     $library_of_congress->query_type = 0;
     $library_of_congress->save();
+
+    $worldcat = new CatalogSearchSearch;
+    $worldcat->query_string = 'http://www.worldcat.org/search?qt=worldcat_org_all&q=%s';
+    $worldcat->catalog_name = 'WorldCat';
+    $worldcat->display = 1;
+    $worldcat->query_type = 0;
+    $worldcat->save();
   }
 
   public function hookUpgrade($args)
