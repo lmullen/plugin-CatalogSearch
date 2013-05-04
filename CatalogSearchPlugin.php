@@ -1,14 +1,24 @@
 <?php
 
-/*
- * Catalog Search Plugin for Omeka 
+/**
+ * Catalog Search Plugin
  *
- * */
+ * @copyright Copyright 2013 Lincoln A. Mullen
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
+ *
+ */
 
 require_once dirname(__FILE__) . '/helpers/CatalogSearchFunctions.php';
 
-class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
-
+/**
+ * Catalog Search Plugin
+ *
+ */
+class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin
+{
+  /**
+   * @var array Hooks for the plugin.
+   */
   protected $_hooks = array(
     'install',
     'uninstall',
@@ -17,10 +27,16 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     'public_items_show'
   );
 
+  /**
+   * @var array Filters for the plugin.
+   */
   protected $_filters = array(
     'admin_navigation_main'
   );
 
+  /**
+   * Install the plugin.
+   */
   public function hookInstall() {
 
     // Create the table.
@@ -100,6 +116,11 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     $worldcat->save();
   }
 
+  /**
+   * Upgrade the plugin.
+   *
+   * @param array $args contains: 'old_version' and 'new_version'
+   */
   public function hookUpgrade($args)
   {
     $oldVersion = $args['old_version'];
@@ -113,6 +134,9 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
 
   }
 
+  /**
+   * Uninstall the plugin.
+   */
   public function hookUninstall() {
     // Drop the table.
     $db = $this->_db;
@@ -122,17 +146,22 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     $this->_uninstallOptions();
   }
 
+  /**
+   * Define the ACL.
+   * 
+   * @param Omeka_Acl
+   */
   public function hookDefineAcl($args)
   {
-        $acl = $args['acl'];
+    $acl = $args['acl'];
 
-        $indexResource = new Zend_Acl_Resource('CatalogSearch_Index');
-        $pageResource = new Zend_Acl_Resource('CatalogSearch_Page');
-        $acl->add($indexResource);
-        $acl->add($pageResource);
+    $indexResource = new Zend_Acl_Resource('CatalogSearch_Index');
+    $pageResource = new Zend_Acl_Resource('CatalogSearch_Page');
+    $acl->add($indexResource);
+    $acl->add($pageResource);
 
-        $acl->allow(array('super', 'admin'), array('CatalogSearch_Index', 'CatalogSearch_Page'));
-        $acl->allow(null, 'CatalogSearch_Page', 'show');
+    $acl->allow(array('super', 'admin'), array('CatalogSearch_Index', 'CatalogSearch_Page'));
+    $acl->allow(null, 'CatalogSearch_Page', 'show');
   }
 
   public function filterAdminNavigationMain($nav)
@@ -146,7 +175,9 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     return $nav;
   }
 
-  // Display the links to the catalogs on the public item page
+  /**
+   * Display the links to the catalogs on the public item page.
+   */
   public function hookPublicItemsShow(){
 
     $item = get_current_record('item');

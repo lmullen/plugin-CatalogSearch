@@ -1,12 +1,15 @@
 <?php
 
-/*
- * Catalog Search Plugin for Omeka 
+/**
+ * Catalog Search Plugin
  *
- * */
+ * @copyright Copyright 2013 Lincoln A. Mullen
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
+ *
+ */
 
 /*
- * The Catalog Search search record class
+ * The Catalog Search search record class.
  *
  * */
 class CatalogSearchSearch extends Omeka_Record_AbstractRecord
@@ -26,6 +29,9 @@ class CatalogSearchSearch extends Omeka_Record_AbstractRecord
       'action' => $action, 'id' => $this->id);
   }
 
+  /**
+   * Validate form input.
+   */
   protected function _validate()
   {
     if (empty($this->catalog_name)) {
