@@ -33,7 +33,6 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
         `catalog_name` tinytext COLLATE utf8_unicode_ci NOT NULL,
         `display` tinyint(1) NOT NULL,
         `query_type` tinyint(1) NOT NULL,
-        `editable` tinyint(1) NOT NULL,
         PRIMARY KEY (`id`)
       ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
     $db->query($sql);
@@ -43,53 +42,47 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
     // query_string is the search URL with %s for the search terms
     // catalog_name is the display name of the catalog
     // display is an option for whether to display the search link
-    // query_type is 1 for full queries, 0 for short queries
+    // query_type is 0 for full queries, 1 for short queries
     $jstor = new CatalogSearchSearch;
     $jstor->query_string = 'http://www.jstor.org/action/doBasicSearch?Query=%s';
     $jstor->catalog_name = 'JSTOR';
     $jstor->display = 1;
-    $jstor->query_type = 0;
-    $jstor->editable = 0;
+    $jstor->query_type = 1;
     $jstor->save();
 
     $archive_grid = new CatalogSearchSearch;
     $archive_grid->query_string = 'http://archivegrid.org/web/jsp/s.jsp?q=%s';
     $archive_grid->catalog_name = 'Archive Grid';
     $archive_grid->display = 1;
-    $archive_grid->query_type = 0;
-    $archive_grid->editable = 0;
+    $archive_grid->query_type = 1;
     $archive_grid->save();
 
     $google_books = new CatalogSearchSearch;
     $google_books->query_string = 'https://www.google.com/search?btnG=Search+Books&tbm=bks&tbo=1&q=%s';
     $google_books->catalog_name = 'Google Books';
     $google_books->display = 1;
-    $google_books->query_type = 0;
-    $google_books->editable = 0;
+    $google_books->query_type = 1;
     $google_books->save();
 
     $google_scholar = new CatalogSearchSearch;
     $google_scholar->query_string = 'http://scholar.google.com/scholar?btnG=&as_sdt=1%2C22&as_sdtp=&q=%s';
     $google_scholar->catalog_name = 'Google Scholar';
     $google_scholar->display = 1;
-    $google_scholar->query_type = 0;
-    $google_scholar->editable = 0;
+    $google_scholar->query_type = 1;
     $google_scholar->save();
 
     $worldcat = new CatalogSearchSearch;
     $worldcat->query_string = 'http://www.worldcat.org/search?qt=worldcat_org_all&q=%s';
     $worldcat->catalog_name = 'WorldCat';
     $worldcat->display = 1;
-    $worldcat->query_type = 1;
-    $worldcat->editable = 0;
+    $worldcat->query_type = 0;
     $worldcat->save();
 
     $library_of_congress = new CatalogSearchSearch;
     $library_of_congress->query_string = 'http://catalog2.loc.gov/vwebv/search?searchArg=%s&searchCode=GKEY%5E*&searchType=0';
     $library_of_congress->catalog_name = 'Library of Congress';
     $library_of_congress->display = 1;
-    $library_of_congress->query_type = 1;
-    $library_of_congress->editable = 0;
+    $library_of_congress->query_type = 0;
     $library_of_congress->save();
   }
 
@@ -161,9 +154,9 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin {
       foreach ($searches as $search) {
 
         // Decide whether to use full or simple query terms. 
-        if ($search->query_type == '1') {
+        if ($search->query_type == '0') {
           $subject_use = $subject_full;
-        } elseif ($search->query_type == '0') {
+        } elseif ($search->query_type == '1') {
           $subject_use = $subject_simple;
         }
 

@@ -16,7 +16,15 @@ class CatalogSearchSearch extends Omeka_Record_AbstractRecord
   public $catalog_name;
   public $display;
   public $query_type;
-  public $editable;
+
+  public function getRecordUrl($action = 'show')
+  {
+    if ('show' == $action) {
+      return public_url($this->slug);
+    }
+    return array('module' => 'catalog-search', 'controller' => 'index', 
+      'action' => $action, 'id' => $this->id);
+  }
 
 }
 
