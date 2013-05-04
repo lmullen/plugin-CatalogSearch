@@ -125,9 +125,9 @@ class CatalogSearch_IndexController extends Omeka_Controller_AbstractActionContr
         $search->setPostData($_POST);
         if ($search->save()) {
           if ('add' == $action) {
-            $this->_helper->flashMessenger(__('The search "%s" has been added.', $search->title), 'success');
+            $this->_helper->flashMessenger(__('The search "%s" has been added.', $search->catalog_name), 'success');
           } else if ('edit' == $action) {
-            $this->_helper->flashMessenger(__('The search "%s" has been edited.', $search->title), 'success');
+            $this->_helper->flashMessenger(__('The search "%s" has been edited.', $search->catalog_name), 'success');
           }
 
           $this->_helper->redirector('browse');
