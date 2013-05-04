@@ -1,4 +1,4 @@
-# Changelog for Catalog Search Plugin for Omeka
+# Change log for Catalog Search Plugin for Omeka
 
 ## v1.0 (2013-05-04)
 

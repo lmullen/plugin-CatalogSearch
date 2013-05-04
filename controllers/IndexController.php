@@ -1,5 +1,17 @@
 <?php
 
+/**
+ * Catalog Search Plugin
+ *
+ * @copyright Copyright 2013 Lincoln A. Mullen
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
+ *
+ */
+
+/**
+ * The Catalog Search index controller class.
+ *
+ */
 class CatalogSearch_IndexController extends Omeka_Controller_AbstractActionController
 {
 
@@ -127,10 +139,8 @@ class CatalogSearch_IndexController extends Omeka_Controller_AbstractActionContr
       }
     }
 
-
     // Set the page object to the view.
     $this->view->catalog_search_search = $search;
-
   }
 
   protected function _getDeleteSuccessMessage($record)
@@ -139,3 +149,4 @@ class CatalogSearch_IndexController extends Omeka_Controller_AbstractActionContr
   }
 
 }
+
