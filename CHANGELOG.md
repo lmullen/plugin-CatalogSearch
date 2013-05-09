@@ -1,5 +1,11 @@
 # Change log for Catalog Search Plugin for Omeka
 
+## v1.0.2 (2013-05-09)
+
+Bugs fixed:
+
++ Removed trailing whitespace that caused Omeka feeds to not validate
+
 ## v1.0 (2013-05-04)
 
 Features: 

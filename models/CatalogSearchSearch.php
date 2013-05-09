@@ -61,4 +61,4 @@ class CatalogSearchSearch extends Omeka_Record_AbstractRecord
   }
 
 }
-
+?>

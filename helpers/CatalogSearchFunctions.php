@@ -35,4 +35,3 @@ function cleanSubjectString($subject_full)
 }
 
 ?>
-
