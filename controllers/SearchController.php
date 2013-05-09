@@ -26,4 +26,3 @@ class CatalogSearch_SearchController extends Omeka_Controller_AbstractActionCont
 
 }
 ?>
-

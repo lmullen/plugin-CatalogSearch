@@ -215,4 +215,3 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin
 
 }
 ?>
-

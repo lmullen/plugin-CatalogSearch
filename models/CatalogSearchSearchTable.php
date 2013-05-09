@@ -25,4 +25,3 @@ class CatalogSearchSearchTable extends Omeka_Db_Table
 
 }
 ?>
-
