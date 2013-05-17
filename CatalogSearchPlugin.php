@@ -60,7 +60,7 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin
     // display is an option for whether to display the search link
     // query_type is 0 for full queries, 1 for short queries
     $archive_grid = new CatalogSearchSearch;
-    $archive_grid->query_string = 'http://archivegrid.org/web/jsp/s.jsp?q=%s';
+    $archive_grid->query_string = 'http://beta.worldcat.org/archivegrid/?q=%s';
     $archive_grid->catalog_name = 'Archive Grid';
     $archive_grid->display = 1;
     $archive_grid->query_type = 1;
@@ -130,6 +130,16 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin
       // Earlier versions did not create a db table, so just run the 
       // install hook.
       $this->hookInstall();
+    }
+
+    if ($oldVersion < '1.0.3' and $oldVersion > '1.0') {
+      // Update the Archive Grid query string, but only if it is the same
+      // string that used to be the default.
+      $db = $this->_db;
+      $sql = "UPDATE `$db->CatalogSearchSearch` 
+              SET `query_string`='http://beta.worldcat.org/archivegrid/?q=%s'
+              WHERE `query_string`='http://archivegrid.org/web/jsp/s.jsp?q=%s'";
+      $db->query($sql);
     }
 
   }
