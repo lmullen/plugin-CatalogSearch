@@ -1,5 +1,11 @@
 # Change log for Catalog Search Plugin for Omeka
 
+## v1.0.3 ()
+
+Changes:
+
++ Use the newer version of Archive Grid (thanks to Bruce Washburn)
+
 ## v1.0.2 (2013-05-09)
 
 Bugs fixed:
