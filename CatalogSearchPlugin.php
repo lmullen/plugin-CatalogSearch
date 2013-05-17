@@ -132,6 +132,16 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin
       $this->hookInstall();
     }
 
+    if ($oldVersion < '1.0.3' and $oldVersion > '1.0') {
+      // Update the Archive Grid query string, but only if it is the same
+      // string that used to be the default.
+      $db = $this->_db;
+      $sql = "UPDATE `$db->CatalogSearchSearch` 
+              SET `query_string`='http://beta.worldcat.org/archivegrid/?q=%s'
+              WHERE `query_string`='http://archivegrid.org/web/jsp/s.jsp?q=%s'";
+      $db->query($sql);
+    }
+
   }
 
   /**
