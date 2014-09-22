@@ -102,7 +102,7 @@ class CatalogSearchPlugin extends Omeka_Plugin_AbstractPlugin
     $jstor->save();
 
     $library_of_congress = new CatalogSearchSearch;
-    $library_of_congress->query_string = 'http://catalog2.loc.gov/vwebv/search?searchArg=%s&searchCode=GKEY%5E*&searchType=0';
+    $library_of_congress->query_string = 'http://catalog.loc.gov/vwebv/search?searchArg=%s&searchCode=GKEY%5E*&searchType=0';
     $library_of_congress->catalog_name = 'Library of Congress';
     $library_of_congress->display = 1;
     $library_of_congress->query_type = 0;
